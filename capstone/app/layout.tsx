@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Nav from "./constants/Nav"
+import Nav from "./constants/Nav";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,16 +13,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <meta name="og:title" content="Little Lemon" />
-        <meta name="og:description" content="Little Lemon is a family-owned medittarranean restaurant that exists in almost every part of the world, most notably: Chicago, LA, France, Italy, Sweden, Sarajevo, Hong Kong and many others." />
-        <meta name="og:image" content="" />
-      </head>
-      <body className="bg-yellow-50">
-        <Nav />
-        {children}
-      </body>
-    </html>
+      <html lang="en">
+        <head>
+          <meta name="og:title" content="Little Lemon" />
+          <meta
+            name="og:description"
+            content="Little Lemon is a family-owned medittarranean restaurant that exists in almost every part of the world, most notably: Chicago, LA, France, Italy, Sweden, Sarajevo, Hong Kong and many others."
+          />
+          <meta name="og:image" content="" />
+        </head>
+        <body className="bg-yellow-50">
+          <Nav />
+          {children}
+        </body>
+      </html>
   );
 }

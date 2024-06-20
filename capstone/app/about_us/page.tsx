@@ -1,3 +1,7 @@
+import Image from "next/image";
+import meal from "../assets/meal.jpg"
+import meal2 from "../assets/meal2.jpg"
+
 const AboutUs = () => {
   return (
     <section className="bg-yellow-800 py-8">
@@ -8,8 +12,8 @@ const AboutUs = () => {
         <p className="mt-2 text-[#d5d5d5]">We are a family-owned Mediterranean restaurant which brings the best restaurant experience to you.</p>
         <p className="mt-2 text-[#d5d5d5]">We always provide you with the best service and our staff is very polite.</p>
         <div className="flex justify-center mt-4 space-x-4">
-          <div className="bg-gray-300 h-32 w-64"></div>
-          <div className="bg-gray-300 h-32 w-64"></div>
+          <Image src={meal} alt="Meal image" className="h-32 w-64"></Image>
+          <Image src={meal2} alt="Another meal image" className="bg-gray-300 h-32 w-64"></Image>
         </div>
       </div>
     </section>

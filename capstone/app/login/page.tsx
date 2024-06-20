@@ -12,9 +12,9 @@ const Login = () => {
         passagain: ''
     })
 
-    function changeData(e:any){
+    const changeData = (e:any) => {
         setData({
-            ...data,
+            ...data, 
             [e.target.name]: e.target.value
         })
     }
@@ -44,7 +44,9 @@ const Login = () => {
                 <input value={data.passagain} onChange={changeData} name='passagain' type="password" placeholder="Repeat your password..." className="mr-8 text-center border-2 border-yellow-400 rounded-md hover:border-yellow-600"/>
             </div>
         </div>
-        <p>Email:{data.email}</p>
+        <div className='flex justify-center items-center'>
+            <button className='bg-yellow-600 text-yellow-100 w-24 px-4 py-2 rounded-full'>Log In</button>
+        </div>
     </form>
     )
 }

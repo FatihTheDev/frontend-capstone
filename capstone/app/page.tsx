@@ -1,11 +1,16 @@
+'use client'
+
+import { useState } from "react";
 import Image from "next/image";
 import lemon from "./assets/lemon.jpg"
 import Specials from "./specials/page"; 
 import Testimonials from "./testimonials/page";
 import AboutUs from "./about_us/page";
 import Footer from "./footer/page";
+import Order from "./order/page";
 
 export default function Home() {
+
   return (
     <>
      <header className="bg-yellow-100 p-6">
@@ -27,6 +32,7 @@ export default function Home() {
     <Specials/>
     <Testimonials/>
     <AboutUs/>
+    <Order/>
     <Footer/>
     </>
   );
