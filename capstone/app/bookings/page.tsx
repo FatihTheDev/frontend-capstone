@@ -1,10 +1,16 @@
-function Bookings(props: { data: any }) {
-  const { date, time, num_of_guests, occasion } = props.data || {
-    date: '',
-    time: '',
-    num_of_guests: '',
-    occasion: ''
-  };
+'use client'
+
+import React, { useEffect } from 'react';
+import { BookingData } from '../page';
+
+interface BookingsProps {
+  data: BookingData[];
+}
+
+function Bookings({ data }: BookingsProps) {
+  useEffect(() => {
+    console.log("Bookings component received data:", data);
+  }, [data]);
 
   return (
     <>
@@ -20,17 +26,19 @@ function Bookings(props: { data: any }) {
             </tr>
           </thead>
           <tbody>
-            {date && time && num_of_guests && occasion ? (
-              <tr>
-                <td className="py-2 px-4 border-b border-gray-200">{date}</td>
-                <td className="py-2 px-4 border-b border-gray-200">{time}</td>
-                <td className="py-2 px-4 border-b border-gray-200">{num_of_guests}</td>
-                <td className="py-2 px-4 border-b border-gray-200">{occasion}</td>
-              </tr>
-            ) : (
+            {data.length === 0 ? (
               <tr>
                 <td className="py-2 px-4 border-b border-gray-200" colSpan={4}>No reservations yet</td>
               </tr>
+            ) : (
+              data.map((booking, index) => (
+                <tr key={index}>
+                  <td className="py-2 px-4 border-b border-gray-200">{booking.date}</td>
+                  <td className="py-2 px-4 border-b border-gray-200">{booking.time}</td>
+                  <td className="py-2 px-4 border-b border-gray-200">{booking.num_of_guests}</td>
+                  <td className="py-2 px-4 border-b border-gray-200">{booking.occasion}</td>
+                </tr>
+              ))
             )}
           </tbody>
         </table>

@@ -1,40 +1,62 @@
 'use client'
 
+import { useState, ChangeEvent, FormEvent } from "react";
 import { ReactTyped } from "react-typed";
 
-export default function BookingForm(props: {
-  data: any,
-  setData: any;
-}) {
+interface BookingData {
+  date: string;
+  time: string;
+  num_of_guests: string;
+  occasion: string;
+}
 
-  const handleChange = (e: any) => {
-    props.setData({
-      ...props.data,
-      [e.target.name]: e.target.value
-    });
+interface BookingFormProps {
+  onSubmit: (data: BookingData) => void;
+}
+
+export default function BookingForm({ onSubmit }: BookingFormProps) {
+  const [formData, setFormData] = useState<BookingData>({
+    date: '',
+    time: '',
+    num_of_guests: '',
+    occasion: ''
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({
+      ...prevData,
+      [name]: value
+    }));
   };
 
-
-
-  if (!props.data) return <div>Loading...</div>;
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Form submitted with data:", formData);
+    if (typeof onSubmit === 'function') {
+      onSubmit(formData);
+    } else {
+      console.error('onSubmit is not a function');
+    }
+  };
 
   return (
     <>
       <h1 className="text-2xl mt-4 px-[2%] md:px-0 text-yellow-800 text-center font-[500] md:text-4xl">
-        Book a table for Little Lemon and feel the <ReactTyped className="text-2xl mt-4 text-yellow-600 text-center font-[500] mb-4 md:text-4xl" strings={["adventure", "world of taste", "hype"]} typeSpeed={80} backSpeed={100} loop></ReactTyped>
+        Book a table for Little Lemon and feel the <ReactTyped className="text-2xl mt-4 text-yellow-600 text-center font-[500] mb-4 md:text-4xl" strings={["adventure", "world of taste", "hype"]} typeSpeed={80} backSpeed={100} loop />
       </h1>
 
-      <form className="mt-14">
+      <form className="mt-14" onSubmit={handleSubmit}>
         <div className="datetime flex flex-col md:flex-row md:justify-center items-center border-2 border-yellow-300 py-3">
           <div className="date pb-4 md:pb-0">
             <label htmlFor="date" className="text-md md:text-lg text-yellow-800">Choose when to book the table: </label>
-            <input onChange={handleChange} className="px-2 border-2 border-yellow-600 bg-yellow-100 rounded-xl mr-5" type="date" id="date" name="date" />
+            <input value={formData.date} onChange={handleChange} className="px-2 border-2 border-yellow-600 bg-yellow-100 rounded-xl mr-5" type="date" id="date" name="date" />
           </div>
 
           <div className="time">
             <label htmlFor="time" className="text-md md:text-lg text-yellow-800">Choose the time: </label>
-            <select onChange={handleChange} name="time" id="time" className="px-2 border-2 border-yellow-600 bg-yellow-100 rounded-xl">
-              <option selected className="border-2 border-yellow-600 rounded-xl">time</option>
+            <select value={formData.time} onChange={handleChange} name="time" id="time" className="px-2 border-2 border-yellow-600 bg-yellow-100 rounded-xl">
+              <option value="">Select time</option>
               <option value="07:00">07:00</option>
               <option value="08:00">08:00</option>
               <option value="09:00">09:00</option>
@@ -47,11 +69,12 @@ export default function BookingForm(props: {
         </div>
         <div className="guests flex flex-col md:flex-row justify-center items-center mt-6 border-2 border-yellow-300 py-3">
           <label htmlFor="num_of_guests" className="text-md md:text-lg text-yellow-800 mr-2">How many guests will be at the table? </label>
-          <input onChange={handleChange} name="num_of_guests" type="number" className=" px-2 border-2 border-yellow-600 bg-yellow-100 rounded-xl" />
+          <input value={formData.num_of_guests} onChange={handleChange} name="num_of_guests" type="number" className=" px-2 border-2 border-yellow-600 bg-yellow-100 rounded-xl" />
         </div>
         <div className="mt-6 occasion flex flex-col md:flex-row md:justify-center items-center border-2 border-yellow-300 py-3">
           <label htmlFor="occasion" className="text-md md:text-lg text-yellow-800 mr-2">Occasion? </label>
-          <select onChange={handleChange} name="occasion" id="occasion" className="px-2 border-2 border-yellow-600 bg-yellow-100 rounded-xl">
+          <select value={formData.occasion} onChange={handleChange} name="occasion" id="occasion" className="px-2 border-2 border-yellow-600 bg-yellow-100 rounded-xl">
+            <option value="">Select occasion</option>
             <option value="birthday">Birthday</option>
             <option value="anniversary">Anniversary</option>
           </select>

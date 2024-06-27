@@ -23,7 +23,7 @@ const Nav = () => {
                             <Link href="/" className="hover:opacity-75">Home</Link>
                             <Link href="/about" className="hover:opacity-75">About</Link>
                             <Link href="/order" className="hover:opacity-75">Menu</Link>
-                            <Link href="/bookings" className="hover:opacity-75">Your Reservations</Link>
+                            <Link href="/#bookings" className="hover:opacity-75">Your Reservations</Link>
                             <Link href="/order" className="bg-yellow-500 px-3 py-2 rounded-lg hover:opacity-75">Order a Meal</Link>
                             <Link href="/table-booking" className="block bg-yellow-500 px-3 py-2 rounded-md text-base font-medium hover:opacity-75">Book a table</Link>
                             <Link href="/login" className="bg-yellow-500 px-3 py-2 rounded-full hover:opacity-75">Log In</Link>

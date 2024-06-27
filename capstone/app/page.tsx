@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import lemon from "./assets/lemon.jpg"
@@ -12,14 +12,37 @@ import Order from "./order/page";
 import BookingForm from "./table-booking/page";
 import Bookings from "./bookings/page";
 
-export default function Home() {
+export interface BookingData {
+  date: string;
+  time: string;
+  num_of_guests: string;
+  occasion: string;
+}
 
-  const [data, setData] = useState<any>({
+export default function Home() {
+  const initialBookingData: BookingData = {
     date: '',
     time: '',
     num_of_guests: '',
     occasion: ''
-  })
+  };
+  const [bookings, setBookings] = useState<BookingData[]>([]);
+
+  const handleBookingSubmit = (newBooking: BookingData) => {
+    console.log("Received new booking:", newBooking);
+
+    const existingBooking = bookings.find(booking => booking.date === newBooking.date && booking.time === newBooking.time);
+
+    if (existingBooking) {
+      alert("That date and time is already reserved");
+    } else {
+      setBookings([...bookings, newBooking]);
+    }
+  };
+
+  useEffect(() => {
+    console.log("Bookings updated:", bookings);
+  }, [bookings]);
 
   return (
     <>
@@ -39,11 +62,9 @@ export default function Home() {
         </div>
       </header>
       <Specials/>
+      <BookingForm onSubmit={handleBookingSubmit} />
+      <Bookings data={bookings} />
       <Testimonials/>
-      <div className="hidden">
-        <BookingForm data={data} setData={setData}/>
-        <Bookings data={data}/>
-      </div>
       <AboutUs/>
       <Order/>
       <Footer/>
