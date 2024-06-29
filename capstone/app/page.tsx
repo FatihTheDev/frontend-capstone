@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import lemon from "./assets/lemon.jpg"
 import Specials from "./specials/page";
@@ -11,6 +10,7 @@ import Footer from "./footer/page";
 import Order from "./order/page";
 import BookingForm from "./table-booking/page";
 import Bookings from "./bookings/page";
+
 
 export interface BookingData {
   date: string;
@@ -53,7 +53,9 @@ export default function Home() {
             <div>
               <p className="text-yellow-800">Chicago</p>
               <p className="mt-2">We are a family-owned Mediterranean restaurant which brings the best restaurant experience to you.</p>
-              <button className="mt-4 px-4 py-2 bg-yellow-400 text-yellow-900 rounded-full hover:text-yellow-700 w-full md:w-auto"><Link href="/table-booking">Reserve a Table</Link></button>
+              <button className="mt-4 px-4 py-2 bg-yellow-400 text-yellow-900 rounded-full hover:text-yellow-700 w-full md:w-auto">
+                <a href="#booking-form">Reserve a Table</a>
+              </button>
             </div>
             <div className="order-first md:order-last mb-4 md:mb-0">
               <Image className="w-full md:w-[40%] mx-auto md:ml-auto rounded-lg" src={lemon} alt="lemon image" />
@@ -62,8 +64,12 @@ export default function Home() {
         </div>
       </header>
       <Specials/>
-      <BookingForm onSubmit={handleBookingSubmit} />
-      <Bookings data={bookings} />
+      <div id="booking-form">
+        <BookingForm onSubmit={handleBookingSubmit} />
+      </div>
+      <div id="bookings">
+        <Bookings data={bookings} />
+      </div>
       <Testimonials/>
       <AboutUs/>
       <Order/>

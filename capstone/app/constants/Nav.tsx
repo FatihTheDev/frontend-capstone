@@ -1,6 +1,5 @@
 'use client'
 
-import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -9,6 +8,14 @@ const Nav = () => {
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+    };
+
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+        setIsMenuOpen(false);
     };
 
     return (
@@ -20,13 +27,13 @@ const Nav = () => {
                     </div>
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">
-                            <Link href="/" className="hover:opacity-75">Home</Link>
-                            <Link href="/about" className="hover:opacity-75">About</Link>
-                            <Link href="/order" className="hover:opacity-75">Menu</Link>
-                            <Link href="/#bookings" className="hover:opacity-75">Your Reservations</Link>
-                            <Link href="/order" className="bg-yellow-500 px-3 py-2 rounded-lg hover:opacity-75">Order a Meal</Link>
-                            <Link href="/table-booking" className="block bg-yellow-500 px-3 py-2 rounded-md text-base font-medium hover:opacity-75">Book a table</Link>
-                            <Link href="/login" className="bg-yellow-500 px-3 py-2 rounded-full hover:opacity-75">Log In</Link>
+                            <a href="/" className="hover:opacity-75">Home</a>
+                            <a href="/about" className="hover:opacity-75">About</a>
+                            <a href="/order" className="hover:opacity-75">Menu</a>
+                            <button onClick={() => scrollToSection('bookings')} className="hover:opacity-75">Your Reservations</button>
+                            <a href="/order" className="bg-yellow-500 px-3 py-2 rounded-lg hover:opacity-75">Order a Meal</a>
+                            <button onClick={() => scrollToSection('booking-form')} className="bg-yellow-500 px-3 py-2 rounded-md text-base font-medium hover:opacity-75">Book a table</button>
+                            <a href="/login" className="bg-yellow-500 px-3 py-2 rounded-full hover:opacity-75">Log In</a>
                         </div>
                     </div>
                     <div className="md:hidden">
@@ -48,13 +55,13 @@ const Nav = () => {
             {isMenuOpen && (
                 <div className="md:hidden">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <Link href="/" className="block hover:opacity-75 px-3 py-2 rounded-md text-base font-medium">Home</Link>
-                        <Link href="/about" className="block hover:opacity-75 px-3 py-2 rounded-md text-base font-medium">About</Link>
-                        <Link href="/order" className="block hover:opacity-75 px-3 py-2 rounded-md text-base font-medium">Menu</Link>
-                        <Link href="/bookings" className="block hover:opacity-75 px-3 py-2 rounded-md text-base font-medium">Your Reservations</Link>
-                        <Link href="/order" className="block bg-yellow-500 px-3 py-2 rounded-md text-base font-medium hover:opacity-75">Order a Meal</Link>
-                        <Link href="/table-booking  " className="block bg-yellow-500 px-3 py-2 rounded-md text-base font-medium hover:opacity-75">Book a table</Link>
-                        <Link href="/login" className="block bg-yellow-500 px-3 py-2 rounded-md text-base font-medium hover:opacity-75">Log In</Link>
+                        <a href="/" className="block hover:opacity-75 px-3 py-2 rounded-md text-base font-medium">Home</a>
+                        <a href="/about" className="block hover:opacity-75 px-3 py-2 rounded-md text-base font-medium">About</a>
+                        <a href="/order" className="block hover:opacity-75 px-3 py-2 rounded-md text-base font-medium">Menu</a>
+                        <button onClick={() => scrollToSection('bookings')} className="block hover:opacity-75 px-3 py-2 rounded-md text-base font-medium w-full text-left">Your Reservations</button>
+                        <a href="/order" className="block bg-yellow-500 px-3 py-2 rounded-md text-base font-medium hover:opacity-75">Order a Meal</a>
+                        <button onClick={() => scrollToSection('booking-form')} className="block bg-yellow-500 px-3 py-2 rounded-md text-base font-medium hover:opacity-75 w-full text-left">Book a table</button>
+                        <a href="/login" className="block bg-yellow-500 px-3 py-2 rounded-md text-base font-medium hover:opacity-75">Log In</a>
                     </div>
                 </div>
             )}
